@@ -1,0 +1,4 @@
+# pnpm v11 reads project settings from this file (no longer the package.json
+# "pnpm" field). Allow esbuild — used by Vite/Vitest — to run its build script.
+allowBuilds:
+  esbuild: true
