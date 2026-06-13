@@ -1,0 +1,56 @@
+.uv-cache/
+.uv-python/
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local app data and generated media (root-level only; not backend/app/data)
+/data/
+backend/.venv/
+backend/.pytest_cache/
+backend/.ruff_cache/
+
+# Local sample / test media (large source files, not for the repo)
+youtube-downloads/
+*.mp4
+*.mkv
+*.mov
+*.webm
+
+# Local env files
+.env
+backend/.env
+
+# Internal engineering log / decision docs (not for the repo)
+docs/
+
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+crash.log
+crash.*.log
+# tflocal-generated provider override
+**/localstack_providers_override.tf
+.terraform.lock.hcl
+
+*.venv
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# AI assistant context / internal notes (never published)
+AGENTS.md
+CLAUDE.md
+CLAUDE.local.md
+claude.local.md
+.claude/
