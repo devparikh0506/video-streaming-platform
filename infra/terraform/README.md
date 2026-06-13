@@ -1,6 +1,6 @@
 # Terraform — LocalStack S3
 
-Provisions the S3 bucket(s) used by the video streaming platform against
+Provisions the S3 bucket(s) used by StreamForge against
 [LocalStack](https://localstack.cloud/). Applied with **`tflocal`**, a thin
 wrapper around Terraform that auto-configures the AWS provider to talk to
 LocalStack (endpoints, path-style addressing, dummy credentials).

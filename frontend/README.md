@@ -1,6 +1,6 @@
 # Frontend
 
-React + Vite + TypeScript client for the video streaming platform. Browse the
+React + Vite + TypeScript client for StreamForge. Browse the
 catalog by category, upload large videos via resumable S3 multipart transfers,
 and play adaptive MPEG-DASH streams.
 

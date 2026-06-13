@@ -1,6 +1,6 @@
-# Video Streaming Platform — Backend Documentation
+# StreamForge — Backend Documentation
 
-A production-grade FastAPI backend for resumable video uploads, multi-resolution transcoding, and MPEG-DASH streaming. Uploads are S3-based multipart resumable transfers. Transcoding is asynchronous via Celery. Videos are streamed as DASH manifests with H.264 video and AAC audio at adaptive bitrates.
+A FastAPI backend for resumable video uploads, multi-resolution transcoding, and MPEG-DASH streaming, built for secure, scalable, low-latency delivery. Uploads are S3-based multipart resumable transfers. Transcoding is asynchronous via Celery. Videos are streamed as DASH manifests with H.264 video and AAC audio at adaptive bitrates.
 
 ## Overview
 
@@ -629,7 +629,7 @@ All settings are defined in `app/core/config.py` and loaded from environment var
 
 | Setting | Type | Default | Purpose |
 |---------|------|---------|---------|
-| `app_name` | string | `Video Streaming Platform API` | FastAPI title |
+| `app_name` | string | `StreamForge API` | FastAPI title |
 | `environment` | string | `development` | Environment label (for logging) |
 | `log_level` | string | `INFO` | Logging level |
 | `api_prefix` | string | `/api` | Base path for all routes |
@@ -898,7 +898,7 @@ flower -A app.workers.celery_app --port=5555
 
 ## Summary
 
-The backend is a production-ready FastAPI service for video uploads, transcoding, and streaming:
+The backend is a FastAPI service for video uploads, transcoding, and streaming, built with security, scalability, and low-latency delivery in mind:
 
 - **Uploads:** Resumable S3 multipart (4-step handshake)
 - **Transcoding:** Async Celery with lease-based claim semantics

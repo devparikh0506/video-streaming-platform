@@ -1,9 +1,9 @@
-# Video Streaming Platform
+# StreamForge
 
-A dockerized, production-style video streaming platform. Upload large video
-files directly to object storage, transcode them into a multi-resolution
-adaptive ladder, and stream them back as MPEG-DASH in the browser — Netflix
-style.
+A dockerized video streaming platform engineered for secure, scalable,
+low-latency delivery. Upload large video files directly to object storage,
+transcode them into a multi-resolution adaptive ladder, and stream them back as
+MPEG-DASH in the browser — Netflix style.
 
 <p>
   <img alt="Python 3.12+" src="https://img.shields.io/badge/python-3.12+-3776AB?logo=python&logoColor=white">

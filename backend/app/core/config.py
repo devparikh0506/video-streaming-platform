@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    app_name: str = "Video Streaming Platform API"
+    app_name: str = "StreamForge API"
     environment: str = "development"
     log_level: str = "INFO"
     api_prefix: str = "/api"

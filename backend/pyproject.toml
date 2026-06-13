@@ -1,7 +1,7 @@
 [project]
 name = "backend"
 version = "0.1.0"
-description = "FastAPI backend for the video streaming platform"
+description = "FastAPI backend for StreamForge"
 readme = "README.md"
 authors = [
     { name = "Dev Parikh", email = "dev.dpparikh@gmail.com" }
