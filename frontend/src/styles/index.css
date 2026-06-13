@@ -1,0 +1,11 @@
+/**
+ * Global stylesheet entry. Imports the design system in cascade order:
+ * tokens → base → layout → components → feature surfaces → pages.
+ */
+@import './tokens.css';
+@import './base.css';
+@import './layout.css';
+@import './ui.css';
+@import './video.css';
+@import './dashboard.css';
+@import './pages.css';

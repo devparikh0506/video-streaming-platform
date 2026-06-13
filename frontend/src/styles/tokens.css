@@ -1,0 +1,108 @@
+/**
+ * Design tokens — light "studio" direction.
+ * Calm near-white canvas, generous whitespace, a single restrained indigo
+ * accent. Tuned for readability and a professional, uncluttered feel.
+ */
+
+:root {
+  /* ---- Surfaces: warm-neutral near-white, white cards ---- */
+  --color-canvas: oklch(98% 0.003 260);
+  --color-bg: oklch(98% 0.003 260);
+  --color-surface: oklch(100% 0 0);
+  --color-surface-raised: oklch(100% 0 0);
+  --color-subtle: oklch(96.5% 0.004 260);
+  --color-subtle-hover: oklch(94.5% 0.005 260);
+
+  --color-border: oklch(91% 0.005 260);
+  --color-border-strong: oklch(85% 0.006 260);
+
+  /* ---- Ink ---- */
+  --color-text: oklch(24% 0.012 264);
+  --color-text-muted: oklch(48% 0.012 264);
+  --color-text-faint: oklch(62% 0.01 264);
+
+  /* ---- Accent: confident indigo ---- */
+  --color-accent: oklch(52% 0.18 264);
+  --color-accent-hover: oklch(47% 0.18 264);
+  --color-accent-press: oklch(43% 0.17 264);
+  --color-accent-soft: oklch(52% 0.18 264 / 0.1);
+  --color-accent-ring: oklch(52% 0.18 264 / 0.22);
+  --color-on-accent: oklch(100% 0 0);
+
+  /* ---- Status (readable on light) ---- */
+  --status-ready: oklch(52% 0.13 155);
+  --status-ready-soft: oklch(52% 0.13 155 / 0.12);
+  --status-processing: oklch(58% 0.12 70);
+  --status-processing-soft: oklch(58% 0.12 70 / 0.14);
+  --status-queued: oklch(54% 0.1 255);
+  --status-queued-soft: oklch(54% 0.1 255 / 0.12);
+  --status-uploading: oklch(54% 0.1 255);
+  --status-uploading-soft: oklch(54% 0.1 255 / 0.12);
+  --status-failed: oklch(55% 0.2 27);
+  --status-failed-soft: oklch(55% 0.2 27 / 0.12);
+
+  /* ---- Typography ---- */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-sans);
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.1875rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.6rem, 1.3rem + 1.2vw, 2.1rem);
+  --text-3xl: clamp(2rem, 1.6rem + 1.8vw, 2.8rem);
+  --text-hero: clamp(2.2rem, 1.7rem + 2.4vw, 3.4rem);
+
+  --leading-tight: 1.12;
+  --leading-snug: 1.35;
+  --leading-normal: 1.65;
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.02em;
+  --tracking-caps: 0.12em;
+
+  /* ---- Spacing (4px base, roomier rhythm) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+  --space-page-x: clamp(1.25rem, 0.4rem + 4vw, 5rem);
+  --space-section: clamp(3.5rem, 2.5rem + 4vw, 6rem);
+  --container-max: 1240px;
+
+  /* ---- Shape ---- */
+  --radius-sm: 7px;
+  --radius: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 26px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation (soft, light-theme) ---- */
+  --shadow-sm: 0 1px 2px oklch(25% 0.03 264 / 0.06);
+  --shadow: 0 2px 8px oklch(25% 0.03 264 / 0.07);
+  --shadow-md: 0 10px 28px oklch(25% 0.03 264 / 0.1);
+  --shadow-lg: 0 22px 55px oklch(25% 0.03 264 / 0.14);
+  --shadow-accent: 0 8px 22px oklch(52% 0.18 264 / 0.28);
+
+  /* ---- Motion ---- */
+  --dur-fast: 140ms;
+  --dur: 220ms;
+  --dur-slow: 400ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- Z-index ---- */
+  --z-header: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  color-scheme: light;
+}
