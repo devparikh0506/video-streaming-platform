@@ -1,0 +1,127 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    env_file:
+      - ./backend/.env
+    environment:
+      API_PREFIX: /api
+      DATA_DIR: /data
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      AWS_ENDPOINT_URL: http://localstack:4566
+      AWS_DYNAMODB_ENDPOINT_URL: http://localstack:4566
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    # Transcoding is CPU-bound and ffmpeg/x264 already parallelizes a single
+    # encode across cores. Pin a LOW prefork concurrency so we don't run N
+    # ffmpeg jobs that fight over the same cores. prefetch-multiplier=1 stops a
+    # process from hoarding queued long-running tasks so work spreads evenly.
+    # Tune CELERY_CONCURRENCY up only if the host has spare cores.
+    command: >
+      celery -A app.workers.celery_app:celery_app worker
+      --loglevel=info
+      --concurrency=${CELERY_CONCURRENCY:-2}
+      --prefetch-multiplier=1
+    env_file:
+      - ./backend/.env
+    environment:
+      DATA_DIR: /data
+      CELERY_CONCURRENCY: ${CELERY_CONCURRENCY:-2}
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/1
+      AWS_ENDPOINT_URL: http://localstack:4566
+      AWS_DYNAMODB_ENDPOINT_URL: http://localstack:4566
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      AWS_DEFAULT_REGION: us-east-1
+    volumes:
+      - ./backend:/app
+      - ./data:/data
+    depends_on:
+      redis:
+        condition: service_healthy
+      localstack:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    command: pnpm dev -- --host 0.0.0.0
+    environment:
+      VITE_API_BASE_URL: http://localhost:8000/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - frontend-node-modules:/app/node_modules
+    depends_on:
+      - backend
+
+  redis:
+    image: redis:7.4-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  localstack:
+    image: localstack/localstack-pro:latest
+    ports:
+      - "4566:4566"
+    environment:
+      # SERVICES omitted -> LocalStack enables all services (lazy-loaded on first use).
+      DEBUG: 0
+      PERSISTENCE: 1
+      # Dev-only: disable LocalStack CORS checks so the Cloud dashboard's
+      # in-browser resource browser can call this instance. Never use this for
+      # anything exposed beyond localhost.
+      DISABLE_CORS_CHECKS: 1
+      # Optional: only needed to attach this container to the LocalStack
+      # Cloud dashboard ("bookmark") or use Pro features. Community S3 works
+      # without it. Set LOCALSTACK_AUTH_TOKEN in your shell/.env to enable.
+      LOCALSTACK_AUTH_TOKEN: ${LOCALSTACK_AUTH_TOKEN:-}
+    volumes:
+      - localstack-data:/var/lib/localstack
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:4566/_localstack/health"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  frontend-node-modules:
+  redis-data:
+  localstack-data:
